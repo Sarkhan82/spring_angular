@@ -1,6 +1,7 @@
 package com.david.spring_angular.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,10 +19,10 @@ import java.time.LocalDateTime;
 @Table(name = "transaction")
 public class Transaction extends AbstractEntity {
 
-/*    private BigDecimal amount;
+    private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
-    private TransactionType type;*/
+    private TransactionType type;
 
     private String destinationIban;
 
