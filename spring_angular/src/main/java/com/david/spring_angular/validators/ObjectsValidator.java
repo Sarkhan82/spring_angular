@@ -1,5 +1,6 @@
-package com.david.spring_angular;
+package com.david.spring_angular.validators;
 
+import com.david.spring_angular.exceptions.ObjectValidationException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -21,7 +22,7 @@ public class ObjectsValidator<T> {
             Set<String> errorMessages = violations.stream()
                     .map(ConstraintViolation::getMessage)
                     .collect(Collectors.toSet());
-            // todo raise an exception
+            throw  new ObjectValidationException(errorMessages, objectToValidate.getClass().getName());
         }
     }
 }
