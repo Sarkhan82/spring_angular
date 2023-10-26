@@ -1,8 +1,10 @@
 package com.david.spring_angular.services.impl;
 
+import com.david.spring_angular.dto.AccountDto;
 import com.david.spring_angular.dto.UserDto;
 import com.david.spring_angular.models.User;
 import com.david.spring_angular.repositories.UserRepository;
+import com.david.spring_angular.services.AccountService;
 import com.david.spring_angular.services.UserService;
 import com.david.spring_angular.validators.ObjectsValidator;
 import jakarta.persistence.EntityNotFoundException;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;
+    private final AccountService accountService;
     private final ObjectsValidator<UserDto> validator;
     @Override
     public Integer save(UserDto dto) {
@@ -45,5 +48,28 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(Integer id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public Integer validateAccount(Integer id) {
+        User user = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No user was found for user account valdidation"));
+        user.setActive(true);
+        // Create a bank acount
+        AccountDto account = AccountDto.builder()
+                .user(UserDto.fromEntity(user))
+                .build();
+        accountService.save(account);
+        repository.save(user);
+        return user.getId();
+    }
+
+    @Override
+    public Integer invalidateAccount(Integer id) {
+        User user = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No user was found for user account valdidation"));
+        user.setActive(false);
+        repository.save(user);
+        return user.getId();
     }
 }

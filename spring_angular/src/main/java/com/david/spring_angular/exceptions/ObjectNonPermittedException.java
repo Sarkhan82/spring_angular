@@ -9,11 +9,11 @@ public class ObjectNonPermittedException extends RuntimeException {
 
     private final String ErrorMsg;
 
-    private String operationId;
+    private final String operationId;
 
     private final String source;
 
-    private String dependency;
+    private final String dependency;
 
 
 }
