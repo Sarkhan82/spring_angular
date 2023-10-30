@@ -6,10 +6,10 @@ import com.david.spring_angular.models.TransactionType;
 import com.david.spring_angular.repositories.TransactionRepository;
 import com.david.spring_angular.services.TransactionService;
 import com.david.spring_angular.validators.ObjectsValidator;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepository repository;
-    private ObjectsValidator<TransactionDto> validator;
+    private final ObjectsValidator<TransactionDto> validator;
     @Override
     public Integer save(TransactionDto dto) {
         validator.validate(dto);

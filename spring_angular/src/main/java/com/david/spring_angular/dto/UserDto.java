@@ -1,11 +1,12 @@
 package com.david.spring_angular.dto;
 
 import com.david.spring_angular.models.User;
-import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.validation.constraints.*;
 
 @Getter
 @Setter
@@ -20,21 +21,21 @@ public class UserDto {
     @NotBlank(message = "Le prénom ne doit pas être blank")
     private String firstname;
 
-    @NotNull(message = "Le nom de famille ne doit pas être null")
-    @NotEmpty(message = "Le nom de famille ne doit pas être vide")
-    @NotBlank(message = "Le nom de famille ne doit pas être blank")
+    @NotNull(message = "Le nom ne doit pas être null")
+    @NotEmpty(message = "Le nom ne doit pas être vide")
+    @NotBlank(message = "Le nom ne doit pas être blank")
     private String lastname;
 
     @NotNull(message = "L'email ne doit pas être null")
     @NotEmpty(message = "L'email ne doit pas être vide")
     @NotBlank(message = "L'email ne doit pas être blank")
-    @Email
+    @Email(message = "L'email n'est pas conforme")
     private String email;
 
     @NotNull(message = "Le mot de passe ne doit pas être null")
     @NotEmpty(message = "Le mot de passe ne doit pas être vide")
     @NotBlank(message = "Le mot de passe ne doit pas être blank")
-    @Size(min=8, max=60)
+    @Size(min=8, max=60, message = "Le mot de passe doit être entre 8 et 60 caractères")
     private String password;
 
     public static UserDto fromEntity(User user) {

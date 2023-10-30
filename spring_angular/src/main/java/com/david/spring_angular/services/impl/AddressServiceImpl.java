@@ -5,10 +5,10 @@ import com.david.spring_angular.models.Address;
 import com.david.spring_angular.repositories.AddressRepository;
 import com.david.spring_angular.services.AddressService;
 import com.david.spring_angular.validators.ObjectsValidator;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 

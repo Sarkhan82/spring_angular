@@ -6,12 +6,12 @@ import com.david.spring_angular.models.Account;
 import com.david.spring_angular.repositories.AccountRepository;
 import com.david.spring_angular.services.AccountService;
 import com.david.spring_angular.validators.ObjectsValidator;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.iban4j.CountryCode;
 import org.iban4j.Iban;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,7 +35,7 @@ public class AccountServiceImpl implements AccountService {
         validator.validate(dto);
         Account account = AccountDto.toEntity(dto);
         boolean userHasAlreadyAnAccount = repository.findByUserId(account.getUser().getId()).isPresent();
-        if(userHasAlreadyAnAccount) {
+        if(userHasAlreadyAnAccount && account.getUser().isActive()) {
             throw new ObjectNonPermittedException(
                     "The selected user has already an active account",
                     "Create Account",

@@ -1,5 +1,6 @@
 package com.david.spring_angular.services.impl;
 
+import com.david.spring_angular.dto.TransactionsSumDetails;
 import com.david.spring_angular.models.TransactionType;
 import com.david.spring_angular.repositories.TransactionRepository;
 import com.david.spring_angular.services.StatisticsService;
@@ -10,6 +11,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -18,10 +20,10 @@ public class StatisticsServiceImpl implements StatisticsService {
 
     private final TransactionRepository transactionRepository;
     @Override
-    public Map<LocalDate, BigDecimal> findSumTransactionByDate(LocalDate startDate, LocalDate endDate, Integer userId) {
+    public List<TransactionsSumDetails> findSumTransactionByDate(LocalDate startDate, LocalDate endDate, Integer userId) {
         LocalDateTime start = LocalDateTime.of(startDate, LocalTime.of(0, 0,0));
         LocalDateTime end = LocalDateTime.of(endDate, LocalTime.of(23, 59,59));
-        return transactionRepository.findSumTransactionByDate(startDate, endDate, userId);
+        return transactionRepository.findSumTransactionByDate(start, end, userId);
     }
 
     @Override
